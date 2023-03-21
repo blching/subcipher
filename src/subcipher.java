@@ -11,6 +11,7 @@ public class subcipher {
         String ct = scan.nextLine(); 
         HashMap map = new HashMap<Character, Integer>();
 
+        //
         for (int i = 0; i < ct.length(); i++) {
             char tmp = ct.charAt(i);
 
@@ -23,6 +24,7 @@ public class subcipher {
             }
         }
 
+        //Prints for each letter of the alphabet, if there is one
         for (int i = 0; i < abc.length(); i++) {
             char tmp = abc.charAt(i);
             if (map.get(tmp) != null) {
@@ -32,9 +34,15 @@ public class subcipher {
             }
         }
 
-        /* System.out.println("Please enter Key:");
+        System.out.println("Please enter Key:");
         String key = scan.nextLine();
-        */
+
+        HashMap keymap = new HashMap<Character, Character>();
+
+        for (int i = 0; i < ct.length(); i++) {
+            
+        }
+        
         scan.close();
 
     }
