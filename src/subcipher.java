@@ -35,33 +35,38 @@ public class subcipher {
         }
 
         //Takes in key
-        System.out.println("");
-        System.out.println("Please enter Key:");
+        while (true) {
+            System.out.println("");
+            System.out.println("Please enter Key: (Or enter -- to end)");
 
-        String key = scan.nextLine();
+            String key = scan.nextLine();
+            if (key.equals("--")) {
+                break;
+            } else {
+                HashMap keymap = new HashMap<Character, Character>();
 
-        HashMap keymap = new HashMap<Character, Character>();
+                //Matches up the key to each letter
+                for (int i = 0; i < key.length(); i++) {
+                    char letter = abc.charAt(i);
+                    char keyletter = key.charAt(i);
 
-        //Matches up the key to each letter
-        for (int i = 0; i < ct.length(); i++) {
-            char letter = abc.charAt(i);
-            char keyletter = key.charAt(i);
+                    keymap.put(letter, keyletter);
+                }
 
-            keymap.put(letter, keyletter);
+                String decipheredString = "";
+
+                for (int i = 0; i < ct.length(); i++) {
+                    char current = ct.charAt(i);
+                    char decipher = (char) keymap.get(current);
+
+                    decipheredString = decipheredString + decipher;
+                }
+
+                decipheredString = decipheredString.toLowerCase();
+                System.out.println("Deciphered String: ");
+                System.out.print(decipheredString);
+            }
         }
-
-        String decipheredString = "";
-
-        for (int i = 0; i < ct.length(); i++) {
-            char current = ct.charAt(i);
-            char decipher = (char) keymap.get(current);
-
-            decipheredString = decipheredString + decipher;
-        }
-
-        System.out.println("Deciphered String: ");
-        System.out.print(decipheredString);
-
         scan.close();
 
     }
