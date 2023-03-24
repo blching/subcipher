@@ -61,58 +61,71 @@ public class a51 {
         stringtoint(y, ystring);
         stringtoint(z, zstring);
 
-        //Calculate Maj of x8 y10 and z10
-        int m = maj(x[7], y[9], z[9]);
+        String keysteam = "";
+        for (int i = 0; i < 32; i++) {
+            //Calculate Maj of x8 y10 and z10
+            int m = maj(x[8], y[10], z[11]);
 
-        //Calculate X steps 13,16,17,18 XOR
-        boolean xstep = false, ystep = false, zstep = false;
-        int current, xtap, ytap, ztap;
+            //Calculate X steps 13,16,17,18 XOR
+            boolean xstep = false, ystep = false, zstep = false;
+            int current, xtap, ytap, ztap;
 
-        current = xor(x[12], x[15]);
-        current = xor(current, x[16]);
-        current = xor(current, x[17]);
+            current = xor(x[13], x[16]);
+            current = xor(current, x[17]);
+            current = xor(current, x[18]);
 
-        xtap = current;
-        //Calculate Y steps, 20, 21 XOR
-        current = xor(y[19], y[20]);
+            xtap = current;
+            //Calculate Y steps, 20, 21 XOR
+            current = xor(y[20], y[21]);
 
-        ytap = current;
+            ytap = current;
 
-        //Calculate Z steps, 7, 20, 21, 22 XOR
-        current = xor(z[6], z[19]);
-        current = xor(current, z[20]);
-        current = xor(current, z[21]);
+            //Calculate Z steps, 7, 20, 21, 22 XOR
+            current = xor(z[7], z[20]);
+            current = xor(current, z[21]);
+            current = xor(current, z[22]);
 
-        ztap = current;
+            ztap = current;
 
-        //Shift each register if x8, y10, z10 = m
-        if (x[7] == m) xstep = true;
-        if (y[9] == m) ystep = true;
-        if (z[9] == m) zstep = true;
+            //Shift each register if x8, y10, z10 = m
+            if (x[8] == m) xstep = true;
+            if (y[10] == m) ystep = true;
+            if (z[10] == m) zstep = true;
 
-        if (xstep) {
-            int xout = -1;
-            shift(x, xtap, xout);
+            if (xstep) {
+                int xout = -1;
+                shift(x, xtap, xout);
+            }
+            
+            if (ystep) {
+                int yout = -1;
+                shift(y, ytap, yout);
+            }
+
+            if (zstep) {
+                int zout = -1;
+                shift(z, ztap, zout);
+            }
+
+            int keystreamBit;
+
+            keystreamBit = xor(x[18], y[21]);
+            keystreamBit = xor(keystreamBit, z[22]);
+
+            String bit = Integer.toString(keystreamBit);
+
+            keysteam = keysteam + bit;
+
+            /* Prints out each register
+            printArray("x", x);
+            printArray("y", y);
+            printArray("z", z);
+            */
         }
-        
-        if (ystep) {
-            int yout = -1;
-            shift(y, ytap, yout);
-        }
 
-        if (zstep) {
-            int zout = -1;
-            shift(z, ztap, zout);
-        }
-
-        int keystreamBit;
-
-        keystreamBit = xor(x[17], y[20]);
-        keystreamBit = xor(keystreamBit, z[21]);
-
+        System.out.println("32-bit Keysteam: " + keysteam);
         printArray("x", x);
         printArray("y", y);
         printArray("z", z);
-
     }    
 }
