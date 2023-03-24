@@ -25,6 +25,15 @@ public class a51 {
 
         output = last;
     }
+
+    static void stringtoint(int[] a, String s) {
+        for (int i = 0; i < a.length; i++) {
+            char tmp = s.charAt(i);
+            int input = Character.getNumericValue(tmp);
+
+            a[i] = input;
+        }
+    }
     public static void main(String[] args) {
         int[] x = new int[19];
         int[] y = new int[22];
@@ -40,6 +49,11 @@ public class a51 {
 
         System.out.println("Please enter z: ");
         String zstring = scan.nextLine(); 
+
+        //Convert string to int
+        stringtoint(x, xstring);
+        stringtoint(y, ystring);
+        stringtoint(z, zstring);
 
         //Calculate Maj of x8 y10 and z10
         int m = maj(x[7], y[9], z[9]);
