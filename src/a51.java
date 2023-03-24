@@ -18,7 +18,7 @@ public class a51 {
     static void shift(int[] a, int tap, int output) {
         int last = a[a.length-1];
 
-        for (int i = a.length-1; i >= 0; i--) {
+        for (int i = a.length-2; i >= 0; i--) {
             a[i+1] = a[i];
         }
         a[0] = tap;
@@ -33,6 +33,12 @@ public class a51 {
 
             a[i] = input;
         }
+    }
+
+    static void printArray(String name, int[] a) {
+        System.out.print(name + ": ");
+        for (int i = 0; i < a.length; i++) System.out.print(a[i]);
+        System.out.println("");
     }
     public static void main(String[] args) {
         int[] x = new int[19];
@@ -64,7 +70,7 @@ public class a51 {
 
         current = xor(x[12], x[15]);
         current = xor(current, x[16]);
-        current = xor(current, x[19]);
+        current = xor(current, x[17]);
 
         xtap = current;
         //Calculate Y steps, 20, 21 XOR
@@ -103,5 +109,10 @@ public class a51 {
 
         keystreamBit = xor(x[17], y[20]);
         keystreamBit = xor(keystreamBit, z[21]);
+
+        printArray("x", x);
+        printArray("y", y);
+        printArray("z", z);
+
     }    
 }
