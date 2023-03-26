@@ -127,5 +127,7 @@ public class a51 {
         printArray("x", x);
         printArray("y", y);
         printArray("z", z);
+        
+        scan.close();
     }    
 }
